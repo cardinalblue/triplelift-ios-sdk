@@ -86,6 +86,10 @@
     for (NSString *impressionURL in self.impressionPixels) {
         [self makeGenericRequest:impressionURL];
     }
+    
+    if (self.logImpressionBlock) {
+        self.logImpressionBlock(self);
+    }
 }
 
 - (void)logClickthrough
@@ -105,6 +109,10 @@
 {
     for (NSString *clickthroughURL in self.clickthroughPixels) {
         [self makeGenericRequest:clickthroughURL];
+    }
+    
+    if (self.logClickthroughBlock) {
+        self.logClickthroughBlock(self);
     }
 }
 
