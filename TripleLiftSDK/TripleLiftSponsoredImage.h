@@ -27,7 +27,13 @@
 
 - (void)logImpression;
 - (void)logClickthrough;
+
+// Not currently supported
 - (void)logInteraction;
 - (void)logShare:(NSString *)shareType;
+
+// Can be used for third-party analytics, runs at most once per sponsored image.
+@property (nonatomic, copy) void (^logImpressionBlock)(TripleLiftSponsoredImage *image);
+@property (nonatomic, copy) void (^logClickthroughBlock)(TripleLiftSponsoredImage *image);
 
 @end

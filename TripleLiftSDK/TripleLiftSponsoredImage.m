@@ -16,6 +16,10 @@
 @property (nonatomic, readonly) NSDictionary *sharePixels;
 
 @property (nonatomic) NSOperationQueue *queue;
+
+@property (nonatomic, assign) BOOL hasLoggedImpression;
+@property (nonatomic, assign) BOOL hasLoggedClickthrough;
+
 @end
 
 @implementation TripleLiftSponsoredImage
@@ -64,13 +68,40 @@
     return [UIImage imageWithData:imageData];
 }
 
-- (void)logImpression {
+- (void)logImpression
+{
+    @synchronized(self)
+    {
+        if (!self.hasLoggedImpression) {
+            self.hasLoggedImpression = YES;
+            [self performSelectorOnMainThread:@selector(_logImpression)
+                                   withObject:nil
+                                waitUntilDone:NO];
+        }
+    }
+}
+
+- (void)_logImpression
+{
     for (NSString *impressionURL in self.impressionPixels) {
         [self makeGenericRequest:impressionURL];
     }
 }
 
 - (void)logClickthrough
+{
+    @synchronized(self)
+    {
+        if (!self.hasLoggedClickthrough) {
+            self.hasLoggedClickthrough = YES;
+            [self performSelectorOnMainThread:@selector(_logClickthrough)
+                                   withObject:nil
+                                waitUntilDone:NO];
+        }
+    }
+}
+
+- (void)_logClickthrough
 {
     for (NSString *clickthroughURL in self.clickthroughPixels) {
         [self makeGenericRequest:clickthroughURL];
