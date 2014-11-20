@@ -20,11 +20,6 @@
 @property (nonatomic, readonly, copy) NSString *imageUrl;
 @property (nonatomic, readonly, copy) NSString *imageThumbnailUrl;
 
-@property (nonatomic, readonly) NSArray *impressionPixels;
-@property (nonatomic, readonly) NSArray *clickthroughPixels;
-@property (nonatomic, readonly) NSArray *interactionPixels;
-@property (nonatomic, readonly) NSDictionary *sharePixels;
-
 // These load the images synchronously
 // It's recommended to use a third-party asynchronous image downloader
 - (UIImage *)getImage;

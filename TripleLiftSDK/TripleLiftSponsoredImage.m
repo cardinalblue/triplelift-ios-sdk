@@ -9,6 +9,12 @@
 #import "TripleLiftSponsoredImage.h"
 
 @interface TripleLiftSponsoredImage ()
+
+@property (nonatomic, readonly) NSArray *impressionPixels;
+@property (nonatomic, readonly) NSArray *clickthroughPixels;
+@property (nonatomic, readonly) NSArray *interactionPixels;
+@property (nonatomic, readonly) NSDictionary *sharePixels;
+
 @property (nonatomic) NSOperationQueue *queue;
 @end
 
